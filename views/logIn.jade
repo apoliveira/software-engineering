@@ -1,0 +1,13 @@
+extends layout
+
+block content
+	form.for-signin
+		h2.form-signin-heading Please Log In
+			label.sr-only(for="inputEmail") Email Address
+			label#inputEmail.form-control(type='email', placeholder='Email Adress', required'', autofocus='')
+			label.sr-only(for='inputPassword') Password
+			input#inputPassword.form-control(type='password', placeholder="Password', required='')
+			.checkbox
+				label
+					input(type='checkbox', value='remember-me') Remember Me	
+			button.btn.btn-lg.btn-primary.btn-block(type='submit') Log In
