@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	form(method='POST')
+		h2 Please Log In
+		div.form-group
+			label(for="inputEmail") Email Address
+			input#inputEmail.form-control(type='email', placeholder='Email Adress', required, autofocus)
+		div.form-group
+			label(for='inputPassword') Password
+			input#inputPassword.form-control(type='password', placeholder='Password', required)
+		div.form-group
+			div.checkbox
+				label(for='remember')
+					input(type='checkbox', value='1')
+					| Remember me
+		button.btn.btn-lg.btn-primary.btn-block(type='submit') Log In
