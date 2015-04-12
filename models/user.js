@@ -1,4 +1,4 @@
-
+var bcrypt = require("bcrypt");
 var mongoose = require("mongoose");
 
 var userSchema = new mongoose.Schema({
@@ -7,6 +7,14 @@ var userSchema = new mongoose.Schema({
 	email: 		String,
 	password: 	String
 });
+
+userSchema.statics.generatePassword = function(password) {
+	return bcrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+};
+
+userSchema.methods.validPassword = function(password) {
+	return User.generatePassword(password) == this.password;
+}
 
 var User = mongoose.model("User", userSchema);
 
