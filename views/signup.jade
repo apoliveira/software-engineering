@@ -1,0 +1,21 @@
+extends layout
+
+block content
+
+	form(method='POST')
+		h2 Sign Up
+		div.form-group
+			label(for='inputEmail') Email Address
+			input#inputEmail.form-control(name='email', type='email', placeholder='Email Adress', required)
+		div.form-group
+			label(for='name') Name
+			input#name.form-control(name='name', type='text', placeholder='Last Name', required)
+		div.form-group
+			label(for='inputPassword') Password
+			input#inputPassword.form-control(name='password', type='password', placeholder='Password', required)
+		div.form-group
+			label(for='confirmPassword') Confirm Password
+			input#confirmPassword.form-control(name='confirmPassword', type='password', placeholder='Password', required)
+		button.btn.btn-primary(type='submit') Sign Up
+		if messages.info
+			div.alert.alert-danger= messages.info

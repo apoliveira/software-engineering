@@ -1,5 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	nav.navbar.navbar-default(role='navigation')
+		div.navbar-header
+			span.navbar-brand Project Blackhawk
+		ul.nav.navbar-nav
+			li
+				a(href="/login") Log in
+			li
+				a(href="/signup") Sign up
+	.panel.panel-default
+		.panel-heading Panel About Us
+		.panel-body We Are Project BlackHawk, presenting a better world.
