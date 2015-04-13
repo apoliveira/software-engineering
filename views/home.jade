@@ -1,0 +1,35 @@
+extends layout
+
+block content
+	nav.navbar.navbar-default(role='navigation')
+		div.navbar-header
+			span.navbar-brand Project Blackhawk
+		ul.nav.navbar-nav
+			li
+				a(href="/home") Presentations
+			li
+				a(href="/whiteboard", target="_blank") WhiteBoard
+			li
+				a(href="/settings") Settings
+			li
+				a(href="/logout") Logout
+	.panel.panel-default
+		.panel-heading Your Presentations
+		.panel-body
+			table.table.table-bordered
+				tr
+					th Name
+					th Present
+					th Edit
+					th Delete
+				tr
+					td Some Presentation
+					td
+						a(href="/")
+							span.glyphicon.glyphicon-star-empty
+					td
+						a(href="/")
+							span.glyphicon.glyphicon-pencil
+					td
+						a(href="/")
+							span.glyphicon.glyphicon-trash
