@@ -7,8 +7,11 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
+global.config = require("./config.js");
+
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/blackhawk");
+mongoose.connect(config.mongo);
+console.log(config.mongo);
 global.mongoose = mongoose;
 
 var passport = require("./passport/index");
