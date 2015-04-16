@@ -11,7 +11,6 @@ global.config = require("./config.js");
 
 var mongoose = require("mongoose");
 mongoose.connect(config.mongo);
-console.log(config.mongo);
 global.mongoose = mongoose;
 
 var passport = require("./passport/index");

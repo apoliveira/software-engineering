@@ -22,7 +22,6 @@ passport.use("signup", new LocalStrategy({
     passReqToCallback: true
   },
   function(req, username, password, done) {
-    console.log("signup");
     User.findOne({ email : username }, function(err, user) {
       if(err) { return done(err, false, { message: req.flash('info', 'There was an error creating your account.') } ); }
       if(user) {
@@ -37,13 +36,12 @@ passport.use("signup", new LocalStrategy({
         password: User.generateHash(password)
       });
       user.save(function(err){
-        if(err) { console.log("error", err);
+        if(err) {
             return done(null, false, { message: req.flash('info', 'We couldn\'t create your account. If this persists please contact us.') });
         }
           return done(null, user);
       });
     });
-    console.log("postsave");
   }
 ));
 
