@@ -18,8 +18,11 @@ var passport = require("./passport/index");
 global.passport = passport;
 
 var index = require('./routes/index');
+var home = require('./routes/home');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
+var whiteboard = require('./routes/whiteboard');
+var settings = require('./routes/settings');
 
 var app = express();
 
@@ -41,8 +44,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
+app.use('/home', home);
 app.use('/login', login);
 app.use('/signup', signup);
+app.use('/whiteboard', whiteboard);
+app.use('/settings', settings);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
