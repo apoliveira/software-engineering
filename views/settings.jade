@@ -17,12 +17,20 @@ block content
 		.panel-heading Settings
 		.panel-body
 			form(method='POST')
-				div.form-group
-					label(for='inputEmail') Email Address
-					input#inputEmail.form-control(name='email', type='email', placeholder='New Email', required)
-				div.form-group
-					label(for='name') Name
-					input#name.form-control(name='name', type='text', placeholder='New Name', required)
+				if user	
+					div.form-group
+						label(for='inputEmail') Email Address
+						input#inputEmail.form-control(name='email', type='email', placeholder=user.email, required)
+					div.form-group
+						label(for='name') Name
+						input#name.form-control(name='name', type='text', placeholder=user.name, required)
+				else	
+					div.form-group
+						label(for='inputEmail') Email Address
+						input#inputEmail.form-control(name='email', type='email', placeholder="-", required)
+					div.form-group
+						label(for='name') Name
+						input#name.form-control(name='name', type='text', placeholder="-", required)
 				div.form-group
 					label(for='inputPassword') New Password
 					input#inputPassword.form-control(name='password', type='password', placeholder='New Password', required)
