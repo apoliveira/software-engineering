@@ -21,19 +21,26 @@ block content
 				span.glyphicon.glyphicon-plus
 		.panel-body
 			table.table.table-bordered
-				tr
+				tr 
 					th Name
 					th Present
 					th Edit
 					th Delete
 				tr
-					td Some Presentation
-					td
-						a(href="/")
-							span.glyphicon.glyphicon-star-empty
-					td
-						a(href="/")
-							span.glyphicon.glyphicon-pencil
-					td
-						a(href="/")
-							span.glyphicon.glyphicon-trash
+					if !pdfs
+						td -
+						td -
+						td -
+						td -
+					else
+						each pdf in pdfs
+							td pdf.title
+							td
+								a(href="/")
+									span.glyphicon.glyphicon-star-empty
+							td
+								a(href="/")
+									span.glyphicon.glyphicon-pencil
+							td
+								a(href="/")
+									span.glyphicon.glyphicon-trash
