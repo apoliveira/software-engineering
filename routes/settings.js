@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET settings page. */
 router.get('/', function(req, res, next) {
-    res.render('settings', { title: 'Settings' });
+    if(req.isAuthenticated() ) {
+      res.render('settings', { title: 'Settings' });
+    } else {
+      res.redirect("/signup");
+    {
 });
 
 module.exports = router;
