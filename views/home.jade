@@ -26,21 +26,22 @@ block content
 					th Present
 					th Edit
 					th Delete
-				tr
-					if !pdfs
-						td -
-						td -
-						td -
-						td -
-					else
-						each pdf in pdfs
+				if pdfs
+					each pdf in pdfs
+						tr
 							td pdf.title
 							td
-								a(href="/")
-									span.glyphicon.glyphicon-star-empty
+								a(href="/presentation/pdf.id/present")
+								span.glyphicon.glyphicon-star-empty
 							td
-								a(href="/")
+								a(href="/presentation/pdf.id/edit")
 									span.glyphicon.glyphicon-pencil
 							td
-								a(href="/")
+								a(href="/presentation/pdf.id/delete")
 									span.glyphicon.glyphicon-trash
+				else
+					tr
+						td - 
+						td - 
+						td - 
+						td - 
