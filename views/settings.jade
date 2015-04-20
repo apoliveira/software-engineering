@@ -20,10 +20,10 @@ block content
 				if user	
 					div.form-group
 						label(for='inputEmail') Email Address
-						input#inputEmail.form-control(name='email', type='email', placeholder=user.email, required)
+						input#inputEmail.form-control(name='email', type='email', value=user.email, required)
 					div.form-group
 						label(for='name') Name
-						input#name.form-control(name='name', type='text', placeholder=user.name, required)
+						input#name.form-control(name='name', type='text', value=user.name, required)
 				else	
 					div.form-group
 						label(for='inputEmail') Email Address
