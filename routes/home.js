@@ -5,7 +5,7 @@ var Presentation = require("../models/presentation.js");
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if( req.isAuthenticated() ) {
-    Presentation.getByAuthor( req.user, function( pdfs ) {
+    Presentation.getByAuthor( req.user, function( err, pdfs ) {
       res.render('home', { title: 'Project Blackhawk', pdfs: pdfs });
     });
   } else {
