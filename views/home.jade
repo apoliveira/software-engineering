@@ -29,15 +29,15 @@ block content
 				if pdfs
 					each pdf in pdfs
 						tr
-							td pdf.title
+							td #{pdf.title}
 							td
-								a(href="/presentation/pdf.id/present")
-								span.glyphicon.glyphicon-star-empty
+								a(href="/presentation/" + pdf.id + "/present")
+									span.glyphicon.glyphicon-star-empty
 							td
-								a(href="/presentation/pdf.id/edit")
+								a(href="/presentation/" + pdf.id + "/edit")
 									span.glyphicon.glyphicon-pencil
 							td
-								a(href="/presentation/pdf.id/delete")
+								a(href="/presentation/" + pdf.id + "/delete")
 									span.glyphicon.glyphicon-trash
 				else
 					tr

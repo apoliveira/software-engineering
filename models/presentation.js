@@ -6,6 +6,10 @@ var presentationSchema = new mongoose.Schema({
 	pdf_path: 	String
 });
 
+presentationSchema.statics.getByAuthor = function(author, next) {
+  return this.model("Presentation").find( { _id : author._id }, next );
+}
+
 var Presentation = mongoose.model("Presentation", presentationSchema);
 
 module.exports = Presentation;
