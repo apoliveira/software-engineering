@@ -16,28 +16,19 @@ block content
 	.panel.panel-default
 		.panel-heading Settings
 		.panel-body
-			form(method='POST')
-				if user	
-					div.form-group
-						label(for='inputEmail') Email Address
-						input#inputEmail.form-control(name='email', type='email', value=user.email, required)
-					div.form-group
-						label(for='name') Name
-						input#name.form-control(name='name', type='text', value=user.name, required)
-				else	
-					div.form-group
-						label(for='inputEmail') Email Address
-						input#inputEmail.form-control(name='email', type='email', placeholder="-", required)
-					div.form-group
-						label(for='name') Name
-						input#name.form-control(name='name', type='text', placeholder="-", required)
+			form(method='POST', action="")
+				div.form-group
+					label(for='inputEmail') Email Address
+					input#inputEmail.form-control(name='email', type='email', value=user.email, required)
+				div.form-group
+					label(for='name') Name
+					input#name.form-control(name='name', type='text', value=user.name, required)
 				div.form-group
 					label(for='inputPassword') New Password
-					input#inputPassword.form-control(name='password', type='password', placeholder='New Password', required)
+					input#inputPassword.form-control(name='password', type='password', placeholder='New Password')
 				div.form-group
 					label(for='confirmPassword') Confirm New Password
-					input#confirmPassword.form-control(name='confirmPassword', type='password', placeholder='Confirm New Password', required)
+					input#confirmPassword.form-control(name='confirmPassword', type='password', placeholder='Confirm New Password')
 				button.btn.btn-primary(type='submit') Submit
 				if messages.info
 					div.alert.alert-danger= messages.info
-
