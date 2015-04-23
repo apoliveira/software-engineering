@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+// Redirect requests without ids
 router.get('/', function(req, res, next) {
-  res.render('whiteboard', { title: 'Project Blackhawk' });
+  res.redirect("/");
+});
+
+router.get('/:id', function(req, res, next) {
+  var id = req.params.id;
+  res.render('whiteboard', { title: 'Project Blackhawk', id: id });
 });
 
 module.exports = router;

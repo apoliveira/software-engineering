@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	div.btn-group-vertical(role="group")
+	div.btn-group-vertical(role='group')
 		button.btn.btn-default
 			span.glyphicon.glyphicon-pencil
 
@@ -13,4 +13,8 @@ block content
 
 		button.btn.btn-default
 			span.glyphicon.glyphicon-arrow-right
-
+	canvas(id='draw', resize='true', style='border: 1px solid black;')
+	script(type='text/javascript', src='/javascripts/paper.js')
+	script(type='text/paperscript', src='/javascripts/whiteboard/draw.js', canvas='draw')
+	script(src='/socket.io/socket.io.js')
+	script(src='/javascripts/whiteboard/socket.js')

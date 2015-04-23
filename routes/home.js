@@ -6,7 +6,7 @@ var Presentation = require("../models/presentation.js");
 router.get('/', function(req, res, next) {
   if( req.isAuthenticated() ) {
     Presentation.getByAuthor( req.user, function( err, pdfs ) {
-      res.render('home', { title: 'Project Blackhawk', pdfs: pdfs });
+      res.render('home', { title: 'Project Blackhawk', pdfs: pdfs, user: req.user });
     });
   } else {
     res.redirect("/login");
