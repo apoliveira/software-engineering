@@ -27,7 +27,6 @@ function onMouseUp(event) {
 }
 
 start = function(data) {
-	console.log(data);
 	paths[data.id] = new Path();
 	opts = data.opts[1];
 	paths[data.id].strokeColor = opts.strokeColor;
@@ -38,7 +37,6 @@ start = function(data) {
 };
 
 drag = function(data) {
-	console.log("drag", data.point);
 	paths[data.id].add(data.point);
 };
 
