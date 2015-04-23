@@ -10,6 +10,7 @@ io.on("connection", function( socket ) {
 
 	var emit = function( msg ) {
 		return function(data) {
+			data = data || {};
 			data.id = this.id;
 			io.to(this.room).emit(msg, data);
 		};
@@ -18,6 +19,8 @@ io.on("connection", function( socket ) {
 	socket.on("start", emit("start") );
 	socket.on("drag", emit("drag") );
 	socket.on("done", emit("done") );
+	socket.on("undo", emit("undo") );
+	socket.on("clearAll", emit("clearAll") );
 
 });
 

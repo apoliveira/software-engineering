@@ -17,3 +17,11 @@ socket.on("drag", function(data) {
 socket.on("done", function(data) {
 	done(data);
 });
+
+socket.on("undo", function(data) {
+	undo(data);
+});
+
+socket.on("clearAll", function() {
+	clearAll();
+});
