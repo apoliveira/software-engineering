@@ -24,6 +24,7 @@ var signup = require('./routes/signup');
 var whiteboard = require('./routes/whiteboard');
 var settings = require('./routes/settings');
 var uploadPdf = require('./routes/uploadPdf');
+var presentation = require('./routes/presentation');
 
 var app = express();
 
@@ -52,6 +53,7 @@ app.use('/signup', signup);
 app.use('/whiteboard', whiteboard);
 app.use('/settings', settings);
 app.use('/uploadPdf', uploadPdf);
+app.use('/presentation', presentation);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
