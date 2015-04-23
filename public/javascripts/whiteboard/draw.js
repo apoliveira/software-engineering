@@ -38,7 +38,6 @@ function onMouseUp(event) {
 
 start = function(data) {
 	paths[data.id] = new Path();
-	console.log("start");
 	opts = data.opts[1];
 	paths[data.id].strokeColor = opts.strokeColor;
 	paths[data.id].strokeWidth = opts.strokeWidth;
@@ -54,17 +53,17 @@ drag = function(data) {
 };
 
 done = function(data) {
-	var segs = paths[data.id].segments;
+	var path = paths[data.id];
+	var segs = path.segments;
 	// If there's only a 'dot' draw it as a circle
-	console.log(segs);
 	if( segs.length == 1 ) {
 		var opts = data.opts[1];
 		var point = new paper.Point( data.point.x, data.point.y );
 		var p = new paper.Path.Circle( point, opts.strokeWidth/2 );
 		p.fillColor = opts.strokeColor;
 		paths[data.id] = p;
-	} else {
-		paths[data.id].smoothen();
+	} else if(path.smoothen) {
+		path.smoothen();
 	}
 	paper.view.update();
 }
@@ -75,8 +74,21 @@ clearAll = function() {
 }
 
 undo = function(data) {
-	console.log("undo");
 	var segs = paths[data.id].segments;
 	paths[data.id].removeSegment( segs.length - 1 );
 	paper.view.update();
+}
+
+pen = function() {
+	color = "black";
+	width = 3;
+	document.getElementById("pen").style.background = "grey";
+	document.getElementById("eraser").style.background = "white";
+}
+
+erase = function() {
+	color = "white";
+	width = 15;
+	document.getElementById("eraser").style.background = "grey";
+	document.getElementById("pen").style.background = "white";
 }

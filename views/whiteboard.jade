@@ -2,9 +2,9 @@ extends layout
 
 block content
 	div.btn-group-horizontal(role='group')
-		button.btn.btn-default(onclick="javascript:pen()")
+		button#pen.btn.btn-default(onclick="javascript:pen()", style="background: grey;")
 			span.glyphicon.glyphicon-pencil
-		button.btn.btn-default(onclick="javascript:erase()")
+		button#eraser.btn.btn-default(onclick="javascript:erase()")
 			span.glyphicon.glyphicon-erase
 		button.btn.btn-default(onclick="javascript:emitClearAll()")
 			span.glyphicon.glyphicon-trash
