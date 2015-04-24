@@ -33,12 +33,13 @@ block content
 							td #{pdf.title}
 							td
 								a(href="/presentation/" + pdf.id + "/present")
-									span.glyphicon.glyphicon-star-empty
+									button.btn.btn-primary.btn-sm(type='button')
+										span.glyphicon.glyphicon-star-empty
 							td
-								a(href="/presentation/" + pdf.id + "/edit")
+								button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target='#edit')
 									span.glyphicon.glyphicon-pencil
 							td
-								a(href="/presentation/" + pdf.id + "/delete")
+								button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target='#delete')
 									span.glyphicon.glyphicon-trash
 				else
 					tr
@@ -46,3 +47,29 @@ block content
 						td - 
 						td - 
 						td - 
+	div#edit.modal.fade
+		div.modal-dialog
+			div.modal-content
+				div.modal-header
+					span(aria-hidden='true') &times;         
+					h4.modal-title Edit PDF
+				div.modal-body
+					form(method='POST', enctype="multipart/form-data")
+						div.form-group
+							label(for='name') Name
+							input#name.form-control(name='name', type='text', placeholder='Name', required)
+						div.form-group
+							label(for='pdf') PDF
+							input#pdf.form-control(name='pdf', type='file', requried)
+						button.btn.btn-primary(type='submit') Save
+	div#delete.modal.fade
+		div.modal-dialog
+			div.modal-content
+				div.modal-header
+					span(aria-hidden='true') &times;         
+					h3.modal-title Are you sure you want to delete?
+				div.modal-body
+					form(method='POST', enctype="multipart/form-data")
+						div.form-group
+							button.btn.btn-primary(type='submit') Yes
+							button.btn.btn-primary(type='submit') No
