@@ -31,23 +31,27 @@ router.post('/', function(req, res, next) {
       pdf_path: "temp"
     });
 
-    pdf_path = './pdfs/' + presentation._id + ".pdf";
-    presentation.pdf_path = pdf_path;
-
     // Save presentation to db
     presentation.save(function(err) {
-      if(err) {
+      if(err)
         return done(err);
-      }
-    });
 
-    // Rename the file
-    fs.rename(files.pdf.path, pdf_path, function(err) {
-      if (err)
-        return done(err);
+      pdf_path = './pdfs/' + presentation._id + ".pdf";
+      presentation.pdf_path = pdf_path;
+
+      // Save presentation to db with updated pdf_path
+      presentation.save(function(err) {
+        if(err)
+          return done(err);
+
+        // Rename the file
+        fs.rename(files.pdf.path, pdf_path, function(err) {
+          if (err)
+            return done(err);
+        });
+      });
     });
   });
-
 
   res.redirect("/home");
 });

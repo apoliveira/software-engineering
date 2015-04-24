@@ -1,6 +1,24 @@
 extends layout
 
 block content
+	script.
+		$(document).ready(function() {
+			$('#edit').on('show.bs.modal', function(e) {
+				var button = $(e.relatedTarget);
+				var id = button.data('id');
+
+				var editForm = $('#edit-form');
+				editForm[0].action = '/presentation/' + id + '/edit';
+			});
+
+			$('#delete').on('show.bs.modal', function(e) {
+				var button = $(e.relatedTarget);
+				var id = button.data('id');
+
+				var deleteForm = $('#delete-form');
+				deleteForm[0].action = '/presentation/' + id + '/delete';
+			});
+		});
 	nav.navbar.navbar-default(role='navigation')
 		div.navbar-header
 			span.navbar-brand Project Blackhawk
@@ -36,10 +54,10 @@ block content
 									button.btn.btn-primary.btn-sm(type='button')
 										span.glyphicon.glyphicon-star-empty
 							td
-								button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target='#edit')
+								button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target='#edit', data-id=pdf.id)
 									span.glyphicon.glyphicon-pencil
 							td
-								button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target='#delete')
+								button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target='#delete', data-id=pdf.id)
 									span.glyphicon.glyphicon-trash
 				else
 					tr
@@ -54,10 +72,10 @@ block content
 					span(aria-hidden='true') &times;         
 					h4.modal-title Edit PDF
 				div.modal-body
-					form(method='POST', enctype="multipart/form-data")
+					form(id='edit-form', method='POST', action='', enctype="multipart/form-data")
 						div.form-group
 							label(for='name') Name
-							input#name.form-control(name='name', type='text', placeholder='Name', required)
+							input#name.form-control(name='name', type='text', placeholder='Name')
 						div.form-group
 							label(for='pdf') PDF
 							input#pdf.form-control(name='pdf', type='file', requried)
@@ -69,7 +87,6 @@ block content
 					span(aria-hidden='true') &times;         
 					h3.modal-title Are you sure you want to delete?
 				div.modal-body
-					form(method='POST', enctype="multipart/form-data")
+					form(id='delete-form', method='POST', action='', enctype="multipart/form-data")
 						div.form-group
 							button.btn.btn-primary(type='submit') Yes
-							button.btn.btn-primary(type='submit') No
