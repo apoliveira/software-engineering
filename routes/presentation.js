@@ -27,7 +27,7 @@ router.get('/:id/pdf', function(req, res, done) {
 });
 
 // Present route
-router.post('/:id/present', function(req, res, done) {
+router.get('/:id/present', function(req, res, done) {
   res.render('present', { title: 'Project Blackhawk', id: req.params.id });
 });
 
