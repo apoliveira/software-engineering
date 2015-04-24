@@ -27,6 +27,7 @@ var uploadPdf = require('./routes/uploadPdf');
 var presentation = require('./routes/presentation');
 
 var app = express();
+var server = require("http").Server(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
