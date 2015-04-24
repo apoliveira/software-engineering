@@ -19,6 +19,7 @@ block content
 				deleteForm[0].action = '/presentation/' + id + '/delete';
 			});
 		});
+
 	nav.navbar.navbar-default(role='navigation')
 		div.navbar-header
 			span.navbar-brand Project Blackhawk
@@ -34,10 +35,9 @@ block content
 	.panel.panel-default
 		.panel-heading(style="padding-bottom:15px;padding-top:15px;") 
 			span Your Presentations
-			a(href="/uploadPdf")
-				button.btn.btn-default.pull-right(style="margin-top:-6px;")
-					span Create New 
-					span.glyphicon.glyphicon-plus
+			button.btn.btn-default.pull-right(type='button', style="margin-top:-6px;", data-toggle='modal', data-target='#upload-modal')
+				span Create New 
+				span.glyphicon.glyphicon-plus
 		.panel-body
 			table.table.table-bordered
 				tr 
@@ -69,24 +69,44 @@ block content
 		div.modal-dialog
 			div.modal-content
 				div.modal-header
-					span(aria-hidden='true') &times;         
-					h4.modal-title Edit PDF
-				div.modal-body
-					form(id='edit-form', method='POST', action='', enctype="multipart/form-data")
+					button.close(type="button", data-dismiss="modal", aria-label="Close")
+						span(aria-hidden='true') &times;
+					h4.modal-title Edit Presentation
+				form(id='edit-form', method='POST', action='', enctype="multipart/form-data")
+					div.modal-body
 						div.form-group
 							label(for='name') Name
 							input#name.form-control(name='name', type='text', placeholder='Name')
 						div.form-group
 							label(for='pdf') PDF
 							input#pdf.form-control(name='pdf', type='file', requried)
+					div.modal-footer
+						button.btn.btn-primary(type='submit') Save
+	div#upload-modal.modal.fade
+		div.modal-dialog
+			div.modal-content
+				div.modal-header
+					button.close(type="button", data-dismiss="modal", aria-label="Close")
+						span(aria-hidden='true') &times;
+					h4.modal-title Add New Presentation
+				form(id='edit-form', method='POST', action='/presentation/uploadPdf', enctype="multipart/form-data")
+					div.modal-body
+						div.form-group
+							label(for='name') Name
+							input#name.form-control(name='name', type='text', placeholder='Name')
+						div.form-group
+							label(for='pdf') PDF
+							input#pdf.form-control(name='pdf', type='file', requried)
+					div.modal-footer
 						button.btn.btn-primary(type='submit') Save
 	div#delete.modal.fade
 		div.modal-dialog
 			div.modal-content
 				div.modal-header
-					span(aria-hidden='true') &times;         
-					h3.modal-title Are you sure you want to delete?
-				div.modal-body
+					button.close(type="button", data-dismiss="modal", aria-label="Close")
+						span(aria-hidden='true') &times;         
+					h4.modal-title Are you sure you want to delete?
+				div.modal-footer
 					form(id='delete-form', method='POST', action='', enctype="multipart/form-data")
-						div.form-group
-							button.btn.btn-primary(type='submit') Yes
+						button.btn.btn-default(data-dismiss='modal') No
+						button.btn.btn-primary(type='submit') Yes
