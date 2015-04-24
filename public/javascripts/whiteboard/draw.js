@@ -75,7 +75,10 @@ clearAll = function() {
 
 undo = function(data) {
 	var segs = paths[data.id].segments;
+	// remove the last few segments, just one segment isn't enough
 	paths[data.id].removeSegment( segs.length - 1 );
+	paths[data.id].removeSegment( segs.length - 2 );
+	paths[data.id].removeSegment( segs.length - 3 );
 	paper.view.update();
 }
 

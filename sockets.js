@@ -1,7 +1,9 @@
 
 var io = require("socket.io")();
 
-io.on("connection", function( socket ) {
+var whiteboard = io.of("/whiteboard");
+
+whiteboard.on("connection", function( socket ) {
 
 	socket.on("join", function( room ) {
 		socket.join(room);
@@ -12,7 +14,7 @@ io.on("connection", function( socket ) {
 		return function(data) {
 			data = data || {};
 			data.id = this.id;
-			io.to(this.room).emit(msg, data);
+			whiteboard.to(this.room).emit(msg, data);
 		};
 	};
 	
