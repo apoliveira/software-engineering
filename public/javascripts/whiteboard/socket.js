@@ -2,7 +2,7 @@
 var url = location.href.split("/");
 var id = url[url.length - 1];
 
-var socket = io.connect(":3000/whiteboard");
+var socket = io.connect("/whiteboard");
 
 socket.emit("join", id );
 
