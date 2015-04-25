@@ -34,10 +34,12 @@ router.get('/:id/present', function(req, res, done) {
 
 /* POST edit presentation info route */
 router.post('/:id/edit', function(req, res, done) {
+  if( !req.isAuthenticated() )
+    return res.redirect("/login");
   Presentation.findOne({_id: req.params.id}, function(err, presentation) {
     // Make sure the user is the owner
     if( presentation.author_id != req.user.id ) {
-	res.redirect("/home");
+	return res.redirect("/home");
     }
 
     var form = new formidable.IncomingForm();
@@ -77,9 +79,14 @@ router.post('/:id/edit', function(req, res, done) {
 
 /* POST route for the delete presentation function */
 router.post('/:id/delete', function(req, res, done) {
-  /* NOTE: ADD CHECK TO SEE IF USER IS OWNER OF PRESENTATION */
-  // Find the presentation you want to delete
+  if( !req.isAuthenticated() )
+    return res.redirect("/login");
   Presentation.findOne({_id : req.params.id}, function(err, presentation) {
+    // Make sure the user is the owner
+    if( presentation.author_id != req.user.id ) {
+	return res.redirect("/home");
+    }
+
     // Remove presentation from the mongo db
     Presentation.remove({_id : req.params.id}, function(err) {
       if(err) return done(err);
@@ -94,7 +101,9 @@ router.post('/:id/delete', function(req, res, done) {
 });
 
 /* POST method to upload a pdf */
-router.post('/uploadPdf', function(req, res, next) {
+router.post('/uploadPdf', function(req, res, done) {
+  if( !req.isAuthenticated() )
+    return res.redirect("/login");
   var form = new formidable.IncomingForm();
 
   // Set the upload directory
@@ -103,6 +112,9 @@ router.post('/uploadPdf', function(req, res, next) {
   
   // Parse html form
   form.parse(req, function(err, fields, files) {
+
+    if( files.pdf.type !== "application/pdf" )
+      return done("Not a PDF");
     // Create presentation object
     var presentation = new Presentation({
       author_id: req.user._id,
