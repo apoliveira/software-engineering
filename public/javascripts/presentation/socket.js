@@ -5,7 +5,7 @@
 var url = location.href.split("/");
 var socketId = url[url.length - 2];
 
-var socket = io.connect("/presentation");
+var socket = io.connect(":3000/presentation");
 
 socket.on("change page", function(data) {
 	emitClearAll();
