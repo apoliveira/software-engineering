@@ -72,6 +72,13 @@ presentation.on("connection", function( socket ) {
 		}
 	});
 
+	socket.on("audio data", function(data) {
+		var user = socket.client.request.user;
+		if( user ) {
+			presentation.to(socket.room).emit("audio data", data);
+		}
+	});
+
 	// Presentation whiteboard
 	var emit = function( msg ) {
 		return function(data) {
@@ -86,6 +93,7 @@ presentation.on("connection", function( socket ) {
 	socket.on("done", emit("done") );
 	socket.on("undo", emit("undo") );
 	socket.on("clearAll", emit("clearAll") );
+	socket.on("audio data", emit("audio data") );
 });
 
 module.exports = io;

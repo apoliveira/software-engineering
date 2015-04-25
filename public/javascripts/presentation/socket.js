@@ -31,3 +31,23 @@ socket.on("undo", function(data) {
 socket.on("clearAll", function() {
 	clearAll();
 });
+
+socket.on("audio data", function(data) {
+	playByteArray(data);
+	console.log(data);
+});
+
+function playByteArray( bytes ) {
+    var buffer = new Uint8Array( bytes.length );
+    buffer.set( new Uint8Array(bytes), 0 );
+
+    audioContext.decodeAudioData(buffer.buffer, play);
+}
+
+function play( audioBuffer ) {
+    var source = audioContext.createBufferSource();
+    source.buffer = audioBuffer;
+    source.connect( context.destination );
+    source.start(0);
+}
+

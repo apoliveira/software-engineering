@@ -30,6 +30,7 @@ var signup = require('./routes/signup');
 var whiteboard = require('./routes/whiteboard');
 var settings = require('./routes/settings');
 var presentation = require('./routes/presentation');
+var tempA = require('./routes/tempAudioUpload');
 
 var app = express();
 var server = require("http").Server(app);
@@ -59,6 +60,7 @@ app.use('/signup', signup);
 app.use('/whiteboard', whiteboard);
 app.use('/settings', settings);
 app.use('/presentation', presentation);
+app.use('/tempUploadAudio', tempA);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
