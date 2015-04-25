@@ -2,10 +2,19 @@ extends layout
 
 block content
 	div.btn-group-horizontal(role='group')
-		button#pen.btn.btn-default(onclick="javascript:pen()", style="background: grey;")
-			span.glyphicon.glyphicon-pencil
-		button#eraser.btn.btn-default(onclick="javascript:erase()")
-			span.glyphicon.glyphicon-erase
+		div.btn-group
+			button#pen.btn.btn-default.dropdown-toggle( data-toggle="dropdown", onclick="javascript:pen();", style="background: grey;")
+				span.glyphicon.glyphicon-pencil
+			ul.dropdown-menu(role="menu")
+				li
+					input#pen-width-picker(type="range", min="1", max="30", step="1", value="2")
+		input#color-picker(type="color")
+		div.btn-group
+			button#eraser.btn.btn-default.dropdown-toggle( data-toggle="dropdown", onclick="javascript:erase();")
+				span.glyphicon.glyphicon-erase
+			ul.dropdown-menu(role="menu")
+				li
+					input#eraser-width-picker(type="range", min="1", max="50", step="1", value="2")
 		button.btn.btn-default(onclick="javascript:emitClearAll()")
 			span.glyphicon.glyphicon-trash
 		button.btn.btn-default(onclick="javascript:emitUndo()")
