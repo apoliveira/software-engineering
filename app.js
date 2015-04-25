@@ -5,7 +5,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var sessionStore = new session.MemoryStore();
+session = session( { store: sessionStore, secret : "SOME SUPER SECRET SECRET", resave: true, saveUninitialized: true });
 var bodyParser = require('body-parser');
+
+global.sessionStore = sessionStore;
+global.cookieParser = cookieParser;
+global.session = session;
 
 global.config = require("./config.js");
 
@@ -23,7 +29,7 @@ var logout = require('./routes/logout');
 var signup = require('./routes/signup');
 var whiteboard = require('./routes/whiteboard');
 var settings = require('./routes/settings');
-var uploadPdf = require('./routes/uploadPdf');
+var presentation = require('./routes/presentation');
 
 var app = express();
 var server = require("http").Server(app);
@@ -38,7 +44,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session( { secret : "SOME SUPER SECRET SECRET", resave: true, saveUninitialized: true } ));
+app.use(session);
 app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -52,7 +58,7 @@ app.use('/logout', logout);
 app.use('/signup', signup);
 app.use('/whiteboard', whiteboard);
 app.use('/settings', settings);
-app.use('/uploadPdf', uploadPdf);
+app.use('/presentation', presentation);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
