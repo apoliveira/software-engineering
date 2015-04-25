@@ -13,6 +13,7 @@ var present = function(id) {
     pdfDoc = pdf;
     numberOfPages = pdfDoc.numPages;
     renderPage(pageNum);
+    socket.emit("join", socketId );
   });
 };
 
@@ -44,7 +45,7 @@ var renderPage = function(num) {
 var nextPage = function() {
   if(pageNum < numberOfPages) {
     pageNum++;
-    renderPage(pageNum);
+    socket.emit("change page", { pageNum : pageNum, presentationId : socketId });
   }
 }
 
@@ -52,7 +53,7 @@ var nextPage = function() {
 var prevPage = function() {
   if(1 < pageNum) {
     pageNum--;
-    renderPage(pageNum);
+    socket.emit("change page", { pageNum : pageNum, presentationId : socketId });
   }
 }
 
@@ -67,9 +68,9 @@ var fullscreen = function() {
 
 window.onkeyup = function(e) {
   var key = e.keyCode ? e.keyCode : e.which;
-  if(key == 38 || key == 39)
+  if(key == 39)
     nextPage();
-  else if(key == 37 || key == 40)
+  else if(key == 37)
     prevPage();
 };
 

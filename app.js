@@ -5,7 +5,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var sessionStore = new session.MemoryStore();
+session = session( { store: sessionStore, secret : "SOME SUPER SECRET SECRET", resave: true, saveUninitialized: true });
 var bodyParser = require('body-parser');
+
+global.sessionStore = sessionStore;
+global.cookieParser = cookieParser;
+global.session = session;
 
 global.config = require("./config.js");
 
@@ -39,7 +45,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session( { secret : "SOME SUPER SECRET SECRET", resave: true, saveUninitialized: true } ));
+app.use(session);
 app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
