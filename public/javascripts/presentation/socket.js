@@ -8,6 +8,26 @@ var socketId = url[url.length - 2];
 var socket = io.connect(":3000/presentation");
 
 socket.on("change page", function(data) {
-	console.log("change page", data);
+	emitClearAll();
 	renderPage( data.pageNum );
+});
+
+socket.on("start", function(data) {
+	start(data);
+});
+
+socket.on("drag", function(data) {
+	drag(data);
+});
+
+socket.on("done", function(data) {
+	done(data);
+});
+
+socket.on("undo", function(data) {
+	undo(data);
+});
+
+socket.on("clearAll", function() {
+	clearAll();
 });

@@ -21,10 +21,21 @@ html
 		script(src="/javascripts/presentation/present.js")
 		script.
 			present("#{id}");
-
 	body
 		button(id="prev_page") Previous
 		button(id="next_page") Next
 		button(id="full_screen") Full Screen
-		canvas(id="the-canvas", style="border:1px solid black;", allowfullscreen, webkitallowfullscreen)
-
+		div.btn-group-horizontal(role='group')
+			button#pen.btn.btn-default(onclick="javascript:pen()", style="background: grey;")
+				span.glyphicon.glyphicon-pencil
+			button#eraser.btn.btn-default(onclick="javascript:erase()")
+				span.glyphicon.glyphicon-erase
+			button.btn.btn-default(onclick="javascript:emitClearAll()")
+				span.glyphicon.glyphicon-trash
+			button.btn.btn-default(onclick="javascript:emitUndo()")
+				span.glyphicon.glyphicon-arrow-left
+		div(style="width: 60%; height:60%;position: absolute;")
+			canvas(id="draw", style="border:1px solid black; width:100%; height: 100%; position: absolute;", allowfullscreen, webkitallowfullscreen, resize="true")
+			canvas(id="the-canvas", style="border:1px solid black; width: 100%; height: 100%; ", allowfullscreen, webkitallowfullscreen, resize="true")
+		script(type='text/javascript', src='/javascripts/paper.js')
+		script(type='text/paperscript', src='/javascripts/presentation/draw.js', canvas='draw')

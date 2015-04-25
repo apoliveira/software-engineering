@@ -28,7 +28,6 @@ var whiteboard = io.of("/whiteboard");
 var presentation = io.of("/presentation");
 
 whiteboard.on("connection", function( socket ) {
-	console.log("connection white");
 
 	socket.on("join", function( room ) {
 		socket.join(room);
@@ -53,12 +52,10 @@ whiteboard.on("connection", function( socket ) {
 presentation.curPage = {};
 
 presentation.on("connection", function( socket ) {
-	console.log("connection pres");
 
 	socket.on("join", function(room) {
 		socket.join(room);
 		socket.room = room;
-		console.log("join");
 		if( presentation.curPage[room] )
 			socket.emit("change page", { pageNum: presentation.curPage[room] });
 	});
@@ -68,16 +65,27 @@ presentation.on("connection", function( socket ) {
 		if( user ) {
 			Presentation.findOne( { _id: data.presentationId }, function( err, pdf ) {
 				if( pdf.author_id == user.id ) {
-					console.log("owner");
 					presentation.curPage[socket.room] = data.pageNum;
 					presentation.to(socket.room).emit("change page", data);
 				}
 			});
 		}
-		else {
-		console.log("not owner");
-		}
 	});
+
+	// Presentation whiteboard
+	var emit = function( msg ) {
+		return function(data) {
+			data = data || {};
+			data.id = this.id;
+			presentation.to(this.room).emit(msg, data);
+		};
+	};
+	
+	socket.on("start", emit("start") );
+	socket.on("drag", emit("drag") );
+	socket.on("done", emit("done") );
+	socket.on("undo", emit("undo") );
+	socket.on("clearAll", emit("clearAll") );
 });
 
 module.exports = io;
