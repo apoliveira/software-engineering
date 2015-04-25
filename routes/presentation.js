@@ -34,8 +34,12 @@ router.get('/:id/present', function(req, res, done) {
 
 /* POST edit presentation info route */
 router.post('/:id/edit', function(req, res, done) {
-  /* NOTE: ADD CHECK TO SEE IF USER IS OWNER OF PRESENTATION */
   Presentation.findOne({_id: req.params.id}, function(err, presentation) {
+    // Make sure the user is the owner
+    if( presentation.author_id != req.user.id ) {
+	res.redirect("/home");
+    }
+
     var form = new formidable.IncomingForm();
 
     // Set the settings of the upload function
