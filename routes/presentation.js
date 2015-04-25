@@ -123,12 +123,12 @@ router.post('/uploadPdf', function(req, res, next) {
         fs.rename(files.pdf.path, pdf_path, function(err) {
           if (err)
             return done(err);
+
+          res.redirect("/home");
         });
       });
     });
   });
-
-  res.redirect("/home");
 });
 
 module.exports = router;
