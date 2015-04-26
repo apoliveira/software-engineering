@@ -6,6 +6,8 @@ paths = {};
 tool.minDistance = 5;
 var color = "black";
 var width = 2;
+var penWidth = 2;
+var eraserWidth = 2;
 var cap = "round";
 var join = "round";
 
@@ -83,15 +85,29 @@ undo = function(data) {
 }
 
 pen = function() {
-	color = "black";
-	width = 3;
+	color = $("#color-picker")[0].value;
+	width = penWidth;
 	document.getElementById("pen").style.background = "grey";
 	document.getElementById("eraser").style.background = "white";
 }
 
 erase = function() {
 	color = "white";
-	width = 15;
+	width = eraserWidth;
 	document.getElementById("eraser").style.background = "grey";
 	document.getElementById("pen").style.background = "white";
 }
+
+$("#color-picker").on("input", function() {
+        color = this.value;
+});
+
+$("#pen-width-picker").on("input", function() {
+        penWidth = this.value;
+        pen();
+});
+
+$("#eraser-width-picker").on("input", function() {
+        eraserWidth = this.value;
+        erase();
+});

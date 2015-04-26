@@ -1,0 +1,19 @@
+html
+	head
+		script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+		script(type="text/javascript", src="/javascripts/qrcodejs/qrcode.min.js")
+	body(style="padding: 0; margin: 0;")
+		a(href="#{url}") Return to presentation
+		div#img(style="width:95%; height: 95%; ")
+		script.
+			var qrcode = new QRCode("img", {
+				text: "#{url}",
+				width: 128,
+				height: 128,
+				colorDark : "#000000",
+				colorLight : "#ffffff",
+				correctLevel : QRCode.CorrectLevel.H
+			});
+			var img = $("#img > img");
+			img.css("height","90%")
+			img.css("margin","0 auto")
