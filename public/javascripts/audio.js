@@ -44,6 +44,16 @@ var initializeRecorder = function(stream) {
 var recorderProcess = function(e) {
   // Recording in mono so get the channel data from the first channel
   var audio = e.inputBuffer.getChannelData(0);
-  socket.emit("audio data", audio);
+  socket.emit("audio data", convertToArray(audio));
+//  var audioInt = convertFloat32ToInt16(audio);
+//  socket.emit("audio data", audioInt);
 };
+
+function convertToArray(buffer) {
+  var buf = [];
+  for(i = 0; i < 2048; i++)
+    buf[i] = buffer[i];
+  return buf;
+}
+
 

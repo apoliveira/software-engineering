@@ -33,21 +33,18 @@ socket.on("clearAll", function() {
 });
 
 socket.on("audio data", function(data) {
-	playByteArray(data);
-	console.log(data);
+	data2 = data;
+	playsound(data);
 });
 
-function playByteArray( bytes ) {
-    var buffer = new Uint8Array( bytes.length );
-    buffer.set( new Uint8Array(bytes), 0 );
-
-    audioContext.decodeAudioData(buffer.buffer, play);
+function playsound( raw ) {
+  var buffer = raw,
+    src = audioContext.createBufferSource(),
+    audioBuffer = audioContext.createBuffer( 1, 2048, audioContext.sampleRate );
+  audioBuffer.getChannelData( 0 ).set( buffer );
+  src.buffer = audioBuffer;
+  src.connect( audioContext.destination );
+  src.start( 0 );
 }
 
-function play( audioBuffer ) {
-    var source = audioContext.createBufferSource();
-    source.buffer = audioBuffer;
-    source.connect( context.destination );
-    source.start(0);
-}
 

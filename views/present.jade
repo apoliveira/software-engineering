@@ -17,7 +17,17 @@ html
 		script(src="/javascripts/pdfjs/display/annotation_helper.js")
 		script.
 			PDFJS.workerSrc = '/javascripts/pdfjs/worker_loader.js';
-			var audioContext = new AudioContext();
+			var buf;
+			var audioContext;
+			if(!window.AudioContext) {
+				if(!window.webkitAudioContext) {
+				} else {
+					window.AudioContext = window.webkitAudioContext;
+				}
+			}
+
+			audioContext = new AudioContext();
+			var data2;
 		script(src="/javascripts/presentation/present.js")
 
 		script(src='/socket.io/socket.io.js')
