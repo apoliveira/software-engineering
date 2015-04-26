@@ -64,6 +64,7 @@ presentation.on("connection", function( socket ) {
 		var user = socket.client.request.user;
 		if( user ) {
 			Presentation.findOne( { _id: data.presentationId }, function( err, pdf ) {
+				if( err || !pdf ) return;
 				if( pdf.author_id == user.id ) {
 					presentation.curPage[socket.room] = data.pageNum;
 					presentation.to(socket.room).emit("change page", data);
