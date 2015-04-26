@@ -44,6 +44,8 @@ html
 				span.glyphicon.glyphicon-trash
 			button.btn.btn-default(onclick="javascript:emitUndo()")
 				span.glyphicon.glyphicon-arrow-left
+			a.btn.btn-default(href="/presentation/#{id}/qr")
+				span.glyphicon.glyphicon-qrcode
 		div(style="width: 60%; height:60%;position: absolute;")
 			canvas(id="draw", style="border:1px solid black; width:100%; height: 100%; position: absolute;", allowfullscreen, webkitallowfullscreen, resize="true")
 			canvas(id="the-canvas", style="border:1px solid black; width: 100%; height: 100%; ", allowfullscreen, webkitallowfullscreen, resize="true")

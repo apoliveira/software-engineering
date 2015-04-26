@@ -32,6 +32,12 @@ router.get('/:id/present', function(req, res, done) {
   res.render('present', { title: 'Project Blackhawk', id: req.params.id });
 });
 
+// show presentation qr code 
+router.get('/:id/qr', function(req, res, done) {
+  var url = "http://blackhawk-dev.herokuapp.com/presentation/" + req.params.id + "/present";
+  res.render('qr', { title: 'Project Blackhawk', url: url});
+});
+
 /* POST edit presentation info route */
 router.post('/:id/edit', function(req, res, done) {
   if( !req.isAuthenticated() )
