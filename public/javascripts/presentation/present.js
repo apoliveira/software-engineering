@@ -12,12 +12,14 @@ var present = function(id) {
     // Using promise to fetch the page
     pdfDoc = pdf;
     numberOfPages = pdfDoc.numPages;
+    setEndPage(numberOfPages);
     renderPage(pageNum);
     socket.emit("join", socketId );
   });
 };
 
 var renderPage = function(num) {
+  setStartPage(num);
   pdfDoc.getPage(num).then(function(page) {
     var scale = 1.5;
     var viewport = page.getViewport(scale);
@@ -72,6 +74,14 @@ window.onkeyup = function(e) {
     nextPage();
   else if(key == 37)
     prevPage();
+};
+
+var setStartPage = function(page) {
+  $('#startPage').text(page);
+};
+
+var setEndPage = function(page) {
+  $('#endPage').text(page);
 };
 
 $("document").ready(function() {
