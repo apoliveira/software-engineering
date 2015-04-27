@@ -29,7 +29,11 @@ router.get('/:id/pdf', function(req, res, done) {
 
 // Present route
 router.get('/:id/present', function(req, res, done) {
-  res.render('present', { title: 'Project Blackhawk', id: req.params.id });
+  Presentation.findOne({_id : req.params.id}, function(err, pdf) {
+    if(err) return done(err);
+
+    res.render('present', { title: 'Project Blackhawk', id: req.params.id, user: req.user, pdfTitle: pdf.title });
+  });
 });
 
 // show presentation qr code 
